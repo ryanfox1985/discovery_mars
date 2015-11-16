@@ -14,19 +14,15 @@
 ActiveRecord::Schema.define(version: 20151116140104) do
 
   create_table "lands", force: :cascade do |t|
-    t.integer  "x"
-    t.integer  "y"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer "x"
+    t.integer "y"
   end
 
   create_table "rovers", force: :cascade do |t|
-    t.integer  "x"
-    t.integer  "y"
-    t.string   "way"
-    t.integer  "land_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer "x"
+    t.integer "y"
+    t.string  "way"
+    t.integer "land_id"
   end
 
   add_index "rovers", ["land_id"], name: "index_rovers_on_land_id"

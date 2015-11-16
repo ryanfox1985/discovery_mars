@@ -3,10 +3,10 @@ class Rover < ActiveRecord::Base
 
   belongs_to :land
 
-  validates :x, presence: true
-  validates :y, presence: true
-  validates :way, presence: true
-  validates :land, presence: true
+  validates_numericality_of :x, greater_than_or_equal_to: 0, only_integer: true
+  validates_numericality_of :y, greater_than_or_equal_to: 0, only_integer: true
+  validates_presence_of :way
+  validates_presence_of :land
   validate  :validate_position
 
   enumerize :way, in: [:n, :e, :s, :w]
@@ -20,61 +20,68 @@ class Rover < ActiveRecord::Base
   end
 
   def location=value
-    x=value[0]
-    y=value[1]
-    way=value[2]
+    self.x=value[0]
+    self.y=value[1]
+    self.way=value[2]
   end
 
   def turn_left
-    case way
+    case self.way.to_sym
       when :n
-        way = :w
+        self.way = :w
       when :w
-        way = :s
+        self.way = :s
       when :s
-        way = :e
+        self.way = :e
       when :e
-        way = :n
+        self.way = :n
       end
   end
 
   def turn_right
-    case way
+    case self.way.to_sym
       when :n
-        way = :e
+        self.way = :e
       when :e
-        way = :s
+        self.way = :s
       when :s
-        way = :w
+        self.way = :w
       when :w
-        way = :n
+        self.way = :n
       end
   end
 
   def move
-    case way
+    case self.way.to_sym
       when :n
-        y += 1
+        self.y += 1
       when :e
-        x += 1
+        self.x += 1
       when :s
-        x -= 1
+        self.y -= 1
       when :w
-        y -= 1
+        self.x -= 1
       end
     validate_position
   end
 
   def track actions
-     
-
-
+    actions.each do |action|
+      case action.to_sym
+        when :l
+          self.turn_left
+        when :r
+          self.turn_right
+        when :m
+          self.move
+        end
+    end
   end
 
   private
 
     def validate_position
-      raise "position invalid" if x<0 || y<0 || x>self.land.x || y>self.land.y
+      raise "position invalid" if self.x<0 || self.y<0 || x>self.land.x || y>self.land.y
     end
 
 end

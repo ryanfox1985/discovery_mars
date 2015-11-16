@@ -5,8 +5,6 @@ class CreateRovers < ActiveRecord::Migration
       t.integer :y
       t.string :way
       t.references :land, index: true, foreign_key: true
-
-      t.timestamps null: false
     end
   end
 end
