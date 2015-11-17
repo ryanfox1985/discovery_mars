@@ -45,4 +45,9 @@
     $('[data-dom="modal"]').modal('show');
   });
 
+  $(document).on('ajax:error', 'form[data-remote]', function(e, data, status, xhr){
+    $('[data-dom="results"]').text("ERROR: " + data.responseJSON.error);
+    $('[data-dom="modal"]').modal('show');
+  });
+
 </script>

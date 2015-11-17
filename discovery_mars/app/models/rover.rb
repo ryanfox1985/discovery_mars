@@ -25,48 +25,9 @@ class Rover < ActiveRecord::Base
     self.way=value[2]
   end
 
-  def turn_left
-    case self.way.to_sym
-      when :n
-        self.way = :w
-      when :w
-        self.way = :s
-      when :s
-        self.way = :e
-      when :e
-        self.way = :n
-      end
-  end
-
-  def turn_right
-    case self.way.to_sym
-      when :n
-        self.way = :e
-      when :e
-        self.way = :s
-      when :s
-        self.way = :w
-      when :w
-        self.way = :n
-      end
-  end
-
-  def move
-    case self.way.to_sym
-      when :n
-        self.y += 1
-      when :e
-        self.x += 1
-      when :s
-        self.y -= 1
-      when :w
-        self.x -= 1
-      end
-    validate_position
-  end
-
   def track actions
     actions.each do |action|
+      break unless valid?
       case action.to_sym
         when :l
           self.turn_left
@@ -78,10 +39,56 @@ class Rover < ActiveRecord::Base
     end
   end
 
-  private
+  def to_json
+    {
+      location: location,
+      errors: errors
+    }
+  end
 
+  protected
+    def turn_left
+      case self.way.to_sym
+        when :n
+          self.way = :w
+        when :w
+          self.way = :s
+        when :s
+          self.way = :e
+        when :e
+          self.way = :n
+        end
+    end
+
+    def turn_right
+      case self.way.to_sym
+        when :n
+          self.way = :e
+        when :e
+          self.way = :s
+        when :s
+          self.way = :w
+        when :w
+          self.way = :n
+        end
+    end
+
+    def move
+      case self.way.to_sym
+        when :n
+          self.y += 1
+        when :e
+          self.x += 1
+        when :s
+          self.y -= 1
+        when :w
+          self.x -= 1
+        end
+    end
+
+  private
     def validate_position
-      raise "position invalid" if self.x<0 || self.y<0 || x>self.land.x || y>self.land.y
+      self.errors.add(:position, "position out of land limits") if self.x<0 || self.y<0 || x>self.land.x || y>self.land.y
     end
 
 end
