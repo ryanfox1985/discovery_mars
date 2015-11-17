@@ -1,0 +1,36 @@
+  
+
+<div>
+<h5>Land bounds</h5>
+<p> <%= @land.bounds.join(', ') %></p>
+<% if !@land.valid? && @land.errors[:rovers].empty? %>
+  <p> Errors </p>
+  <ul>
+  <% @land.errors.to_h.except(:rovers).each do |attribute, error| %>
+    <li><%= "#{attribute.capitalize}: #{error}" %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+</div>
+
+<% unless @land.rovers.empty? %>
+
+  <div>
+    <h5>Rovers </h5>
+    <ul>
+      <% @land.rovers.each do |rover| %>
+        <li>
+        <% if rover.valid? %>
+          <%= rover.location.join(' ').upcase %>
+        <% else %>
+          <% rover.errors.each do |attribute, error| %>
+            <%= "#{attribute.capitalize}: #{error}" %>
+          <% end %>
+        <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+<% end %>

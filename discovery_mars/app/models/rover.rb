@@ -39,13 +39,6 @@ class Rover < ActiveRecord::Base
     end
   end
 
-  def to_json
-    {
-      location: location,
-      errors: errors
-    }
-  end
-
   protected
     def turn_left
       case self.way.to_sym
@@ -88,7 +81,7 @@ class Rover < ActiveRecord::Base
 
   private
     def validate_position
-      self.errors.add(:position, "position out of land limits") if self.x<0 || self.y<0 || x>self.land.x || y>self.land.y
+      self.errors.add(:position, "out of land limits") if self.x<0 || self.y<0 || x>self.land.x || y>self.land.y
     end
 
 end

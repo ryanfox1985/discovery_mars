@@ -16,8 +16,6 @@
   </div>
 </div>
 
-
-
 <div class="modal fade" data-dom="modal">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -25,23 +23,18 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Rovers positions</h4>
       </div>
-      <div class="modal-body">
-        <p class="formated" data-dom="results"></p>
+      <div class="modal-body" data-dom="results">      
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-
-
+    </div>
+  </div>
+</div>
 
 <script type="text/javascript">
-  
   $(document).on('ajax:success', 'form[data-remote]', function(e, data, status, xhr){
-    $('[data-dom="results"]').text(JSON.stringify(data, null, 2));
+    $('[data-dom="results"]').html(data);
     $('[data-dom="modal"]').modal('show');
   });
 
@@ -49,5 +42,4 @@
     $('[data-dom="results"]').text("ERROR: " + data.responseJSON.error);
     $('[data-dom="modal"]').modal('show');
   });
-
 </script>

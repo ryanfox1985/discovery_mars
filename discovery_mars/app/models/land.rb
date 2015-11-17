@@ -21,7 +21,7 @@ class Land < ActiveRecord::Base
     #Init land
     begin
       land_bounds = lines.shift
-      bounds = land_bounds.scan(/^(\d+) (\d+)$/)[0]
+      bounds = land_bounds.scan(/^(-?\d+) (-?\d+)$/)[0]
       bounds.map!(&:to_i)
       land = Land.new(bounds: bounds)
     rescue => e
@@ -51,14 +51,6 @@ class Land < ActiveRecord::Base
     rover = Rover.new(land: self, location: location)
     rover.track actions if actions.present?
     rover
-  end
-
-  def to_json
-    {
-      bounds: bounds,
-      errors: errors,
-      rovers: rovers
-    }
   end
 
 end
