@@ -1,18 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>DiscoveryMars</title>
+  <title>Discovery Mars</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
+  <div class="container">
+    <div class="page-header">
+      <h1 >Discovery Mars</h1>
+    </div>
 
-<header>
- <%= image_tag :rover_header %>
-</header>
-<%= yield %>
+    <%= yield %>
+
+    <hr />
+    <footer class="footer">
+      <p class="text-muted text-left pull-left">&copy; Francisco Sobrino <%= Date.today.year %></p>
+      <%= link_to "https://www.dropbox.com/s/gpqit9pb28agcs3/2015-11-13_francisco_sobrino_rey.pdf?dl=1", class: "text-muted text-right pull-right" do %>
+        <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>
+      <% end %>
+
+    </footer>
+
+  </div>
 
 </body>
 </html>

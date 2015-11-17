@@ -1,6 +1,48 @@
 
-<%= form_tag url: track_pages_path do %>
+<div class="row">
+  <div class="col-lg-6 col-md-12">
+    <%= image_tag :rover_header, alt: "http://www.truthdig.com/cartoon/item/nasa_curiosity_20120810", class: "img-responsive center-block" %>
+  </div>
 
-  <%= text_area_tag :track_orders %>
+   <div class="col-lg-6 col-md-12">
+    <%= form_tag track_pages_path, remote: true do %>
+      <div class="form-group">
+        <%= label_tag :track_orders, "Track orders" %>
+        <%= text_area_tag :track_orders, nil, class: "form-control", rows: 8 %>
+      </div>
 
-<% end %>
+      <%= submit_tag nil, class: "btn btn-default" %>
+    <% end %>
+  </div>
+</div>
+
+
+
+<div class="modal fade" data-dom="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Rovers positions</h4>
+      </div>
+      <div class="modal-body">
+        <p data-dom="results" style="white-space: pre;"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+<script type="text/javascript">
+  
+  $(document).on('ajax:success', 'form[data-remote]', function(e, data, status, xhr){
+    $('[data-dom="results"]').text(JSON.stringify(data, null, 2));
+    $('[data-dom="modal"]').modal('show');
+  });
+
+</script>
