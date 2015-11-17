@@ -16,7 +16,7 @@ class Land < ActiveRecord::Base
   end
 
   def self.parse_order_from_text orders
-    lines = orders.lines.map(&:chomp)
+    lines = orders.lines.map{|l| l.strip.chomp}
     
     #Init land
     begin
@@ -32,7 +32,7 @@ class Land < ActiveRecord::Base
     if land.valid?
       lines.each_slice(2) do |rover_lines|
         begin
-          location = rover_lines[0].downcase.scan(/^(\d+) (\d+) (n|w|e|s)$/)[0]
+          location = rover_lines[0].downcase.scan(/^(-?\d+) (-?\d+) (n|w|e|s)$/)[0]
           location[0] = location[0].to_i
           location[1] = location[1].to_i
           actions = rover_lines[1].to_s.downcase.tr('^(l|r|m)','').split("")
