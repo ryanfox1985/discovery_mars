@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20151116140104) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "lands", force: :cascade do |t|
     t.integer "x"
     t.integer "y"
@@ -25,6 +28,7 @@ ActiveRecord::Schema.define(version: 20151116140104) do
     t.integer "land_id"
   end
 
-  add_index "rovers", ["land_id"], name: "index_rovers_on_land_id"
+  add_index "rovers", ["land_id"], name: "index_rovers_on_land_id", using: :btree
 
+  add_foreign_key "rovers", "lands"
 end
