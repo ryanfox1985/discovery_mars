@@ -22,10 +22,4 @@ test:
 
 production:
   adapter: postgresql
-  pool: 5
-  timeout: 5000
-  host: ec2-54-217-240-205.eu-west-1.compute.amazonaws.com
-  database: dat2gf2jatheap
-  user: izzvtvlqkgwlwr
-  port: 5432
-  password: KduJ6GpCMBtt8QAmv3NFsmK_1l
+  url: <%= ENV['DATABASE_URL'] %>
