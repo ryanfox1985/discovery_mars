@@ -1,6 +1,7 @@
 My contribution TDD and gems.
 
-
+[![Build Status](https://travis-ci.org/ryanfox1985/discovery_mars.svg?branch=master)](https://travis-ci.org/ryanfox1985/discovery_mars)
+[![Coverage Status](https://coveralls.io/repos/ryanfox1985/discovery_mars/badge.svg?branch=master)](https://coveralls.io/r/ryanfox1985/discovery_mars?branch=master)
 
 Coding Problem
 ==============
