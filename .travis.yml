@@ -1,3 +1,4 @@
+sudo: required
 cache: bundler
 language: ruby
 rvm:
@@ -16,3 +17,4 @@ install:
 script:
   - cd $TRAVIS_BUILD_DIR/discovery_mars; RAILS_ENV=test bundle exec rake db:create db:migrate
   - cd $TRAVIS_BUILD_DIR/discovery_mars; RAILS_ENV=test bundle exec rake
+  
