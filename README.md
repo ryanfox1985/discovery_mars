@@ -5,11 +5,6 @@ My contribution TDD and gems.
 
 Coding Problem
 ==============
-Please provide a solution in code for the problem below. The
-deadline for submission is 48 hours after the problems were
-received. Any questions can be sent to
-barcelona-hiring@xing.com.
-
 A squad of robotic rovers are to be landed by NASA on a plateau on
 Mars. This plateau, which is curiously rectangular, must be navigated
 by the rovers so that their on-board cameras can get a complete
